@@ -32,7 +32,10 @@ module.exports = {
         sequelize.query(`select * from cities as city 
         join countries as country on city.country_id = country.country_id
         `)
-            .then(dbRes => res.status(200).send(dbRes[0]))
+            .then(dbRes => {
+                console.log(dbRes[0])
+                res.status(200).send(dbRes[0])
+            })
             .catch(err => console.log(err))
     },
 
@@ -45,11 +48,11 @@ module.exports = {
             .then(dbRes => res.status(200).send(dbRes[0]))
             .catch(err => console.log(err))
     },
-
+    
     //     getCities: (req, res) => {
     //     sequelize.query(`select * from cities as city
     //     join countries as country on city.country_id = country.country_id
-    //     sort by city.city_rating desc
+    //     sort by city.rating desc
     //     `)
     //         .then(dbRes => res.status(200).send(dbRes[0]))
     //         .catch(err => console.log(err))
