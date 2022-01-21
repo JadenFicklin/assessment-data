@@ -28,13 +28,25 @@ module.exports = {
         .catch(err => console.log(err))
     },
 
-    // getCities: (req, res) => {
-    //     sequelize.query(`select * from cities as city
-    //     join countries as country on city.city_id = country.country_id
-    //     `)
-    //         .then(dbRes => res.status(200).send(dbRes[0]))
-    //         .catch(err => console.log(err))
-    // },
+    getCities: (req, res) => {
+        sequelize.query(`select * from cities as city 
+        join countries as country on city.country_id = country.country_id
+        `)
+            .then(dbRes => res.status(200).send(dbRes[0]))
+            .catch(err => console.log(err))
+    },
+
+    // sequelize.query(`update cc_users set first_name = '${firstName}', 
+    // last_name = '${lastName}', 
+    // email = '${email}', 
+    // phone_number = ${phoneNumber}
+    // where user_id = ${userId};
+    
+    // update cc_clients set address = '${address}', 
+    // city = '${city}', 
+    // state = '${state}', 
+    // zip_code = ${zipCode}
+    // where user_id = ${userId};`)
 
     // deleteCity: (req, res) => {
     //     const { id } = req.params
