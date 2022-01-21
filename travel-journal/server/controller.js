@@ -10,26 +10,27 @@ const sequelize = new Sequelize(CONNECTION_STRING, {
         }
     }
 })
+// const countryId = 4
 
 module.exports = {
-    // getCountries: (req, res) => {
-    //     sequelize.query(`select * from countries`)
-    //         .then(dbRes => res.status(200).send(dbRes[0]))
-    //         .catch(err => console.log(err))
-    // },
+    getCountries: (req, res) => {
+        sequelize.query(`select * from countries`)
+            .then(dbRes => res.status(200).send(dbRes[0]))
+            .catch(err => console.log(err))
+    },
 
-    // createCity: (req, res) => {
-    //     const { name, rating } = req.body
-
-    //     sequelize.query(`insert into countries
-    //     values (${countryId}, '${name}', '${rating}')`)
-    //          .then(dbRes => res.status(200).send(dbRes[0]))
-    //          .catch(err => console.log(err))
-    // },
+    createCity: (req, res) => {
+        const { name, rating, countryId: country_id } = req.body
+        
+        sequelize.query(`insert into cities (country_id, name, rating)
+        values (${country_id}, '${name}', '${rating}')`)
+        .then(dbRes => res.status(200).send(dbRes[0]))
+        .catch(err => console.log(err))
+    },
 
     // getCities: (req, res) => {
     //     sequelize.query(`select * from cities as city
-    //     join countries as country on city.country_id = country.country_id
+    //     join countries as country on city.city_id = country.country_id
     //     `)
     //         .then(dbRes => res.status(200).send(dbRes[0]))
     //         .catch(err => console.log(err))
@@ -44,6 +45,23 @@ module.exports = {
     //         .then(dbRes => res.status(200).send(dbRes[0]))
     //         .catch(err => console.log(err))
     // },
+
+    //     getCities: (req, res) => {
+    //     sequelize.query(`select * from cities as city
+    //     join countries as country on city.country_id = country.country_id
+    //     sort by city.city_rating desc
+    //     `)
+    //         .then(dbRes => res.status(200).send(dbRes[0]))
+    //         .catch(err => console.log(err))
+    // },
+
+    // create table cities (
+    //     city_id serial primary key,
+    //     name varchar,
+    //     rating integer,
+    //     country_id integer references countries(country_id),
+    //     limit 3
+    // )
 
     seed: (req, res) => {
         sequelize.query(`
@@ -60,7 +78,8 @@ module.exports = {
                 name varchar,
                 rating integer,
                 country_id integer references countries(country_id)
-            )
+            );
+
 
             insert into countries (name)
             values ('Afghanistan'),
