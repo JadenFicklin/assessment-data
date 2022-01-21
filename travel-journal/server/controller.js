@@ -23,8 +23,16 @@ module.exports = {
 
     //     sequelize.query(`insert into countries
     //     values (${countryId}, '${name}', '${rating}')`)
-    //     .then(dbRes => res.status(200).send(dbRes[0]))
-    //     .catch(err => console.log(err))
+    //          .then(dbRes => res.status(200).send(dbRes[0]))
+    //          .catch(err => console.log(err))
+    // },
+
+    // getCities: (req, res) => {
+    //     sequelize.query(`select * from cities as city
+    //     join countries as country on city.country_id = country.country_id
+    //     `)
+    //         .then(dbRes => res.status(200).send(dbRes[0]))
+    //         .catch(err => console.log(err))
     // },
 
     seed: (req, res) => {
